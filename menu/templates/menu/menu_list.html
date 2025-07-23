@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block title %}Menu - RMS{% endblock title %}
+{% block content %}
+
+<!-- Back Button Section -->
+<!--<div class="container py-3">-->
+<!--  <a href="{% url 'menu' %}" class="btn btn-secondary">Go Back</a>-->
+<!--</div>-->
+
+<div class="container">
+  <h1>Menu Items</h1>
+  <a href="{% url 'menu' %}" class="btn btn-secondary mb-3">Go Back</a>
+  <a href="{% url 'menu_add' %}" class="btn btn-primary mb-3">Add New Menu Item</a>
+</div>
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Category</th>
+      <th>Price</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for item in items %}
+    <tr>
+      <td>{{ item.name }}</td>
+      <td>{{ item.category.name }}</td>
+      <td>S${{ item.price }}</td>
+      <td>
+        <a href="{% url 'menu_edit' item.id %}" class="btn btn-warning">Edit</a>
+        <a href="{% url 'menu_delete' item.id %}" class="btn btn-danger">Delete</a>
+      </td>
+    </tr>
+    {% empty %}
+    <tr>
+      <td colspan="5">No menu items available.</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}
